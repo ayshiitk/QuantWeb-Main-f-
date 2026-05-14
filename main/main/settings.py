@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'app1',
     'crispy_forms',
     'django.contrib.admin',
+    'technical.apps.TechnicalConfig',
+    'risk.apps.RiskConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -136,7 +138,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-fieldpyh
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'redirect_user'

@@ -149,7 +149,15 @@ def backtesting(request):
                 
                 # Execute the Python code (assuming 'hello' function exists)
                 data, error_message = execute_python_code(python_code_string,data)
-                a,capital=backtest_1(data,stop_loss)
+                if error_message or data is None:
+                    # strategy code failed or didn’t return a DataFrame
+                    context = {
+                        'form': form,
+                        'error_message': error_message or "Strategy did not return any data.",
+                        # all your 'first', 'second'… = None
+                    }
+                    return render(request, 'app1/result.html', context)
+                a, capital=backtest_1(data,stop_loss)
                 results=parameters(data,a,tnx)
                 
                 
@@ -162,7 +170,10 @@ def backtesting(request):
                     
                     # Execute the Python code (assuming 'hello' function exists)
                     data, error_message = execute_python_code(python_code_string,data)
-                    a,capital=backtest_1(data,stop_loss)
+                    # if data is None or data.empty:
+                    # # handle error: render a message, raise, or return early
+                    #     raise ValueError("Price data is empty or not loaded correctly")
+                    a, capital=backtest_1(data,stop_loss)
                     results=parameters(data,a,tnx)
                 else:
                     error_message = f"No strategy found with name '{strategy}'"               
